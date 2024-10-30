@@ -40,9 +40,9 @@ import os
 import glob
 from IPython.display import Image, display
 model = YOLO("best.pt")
-#pic = "Recipe-Ingredients-CN-4/test/images/23_jpg.rf.ae336f5bf9905db1d7983679b1c215fd.jpg"
-pic = "https://kimini.online/blog/wp-content/uploads/2022/06/pixta_62717849_M-1200x675.jpg"
-results = model.predict(source=pic, conf=0.05, save=True)
+pic = "Recipe-Ingredients-CN-4/test/images/155_png_jpg.rf.03807a35b88f5727d160dcb786d75276.jpg"
+#pic = "https://img.wongnai.com/p/1920x0/2017/12/24/552c29cacda543f3bd9786cf464b08a2.jpg"
+results = model.predict(source=pic, conf=0.35, save=True)
 
 detected_items = {}
 for result in results:
@@ -56,11 +56,12 @@ for result in results:
 
 print(detected_items)
 
+
 model = genai.GenerativeModel(
   model_name="gemini-1.5-pro",
   safety_settings=safety_settings,
   generation_config=generation_config,
-  system_instruction="I want a food recipe based on the following ingredients:{}. Please format the recipe with the following sections:Ingredients: List all ingredients required for the recipe.Instructions: Provide clear step-by-step instructions for preparing the recipe.Optional Tips: Include any optional tips for variation or improvement of the recipe.",
+  system_instruction="I want a food recipe based on the following ingredients:{}. Please format the recipe with the following sections:Ingredients: List all ingredients required for the recipe.Instructions: Provide clear step-by-step instructions for preparing the recipe.Optional Tips: Include any optional tips for variation or improvement of the recipe. แปลเป็นไทย",
 )
 
 chat_session = model.start_chat(
